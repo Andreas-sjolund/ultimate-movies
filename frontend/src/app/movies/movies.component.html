@@ -1,0 +1,8 @@
+<ul *ngFor="let movie of movies; let i = index">
+    <li>
+        <p>Name: {{ movie.title }}</p>
+        <p>Director: {{ movie.director }}</p>
+        <p>Genre: {{ movie.genre }}</p>
+        <img [src]="movie.imgUrl" />
+    </li>
+</ul>
