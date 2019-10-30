@@ -20,7 +20,7 @@ export class MoviesComponent implements OnInit {
       'https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg'
     );
     this.movies.push(newMovie);
-    console.log(this.movies)
+    console.log(this.movies);
   }
 
 }
