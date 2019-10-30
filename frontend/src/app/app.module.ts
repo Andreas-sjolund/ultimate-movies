@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MoviesComponent } from './movies/movies.component';
 import { StartPageComponent } from './start-page/start-page.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: StartPageComponent},
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     MoviesComponent,
-    StartPageComponent
+    StartPageComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
