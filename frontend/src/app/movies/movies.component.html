@@ -13,9 +13,13 @@
                 <label class="col-2 font-weight-bold">Genre: </label>
                 <p class="col-10">{{ movie.genre }}</p>
             </div>
+            <div class="row">
+                <label class="col-2 font-weight-bold">Description: </label>
+                <p class="col-10">{{ movie.description }}</p>
+            </div>
         </div>
         <div class="col-3">
-            <img [src]="movie.imgUrl" />
+            <img [src]="movie.image_url" />
         </div>
     </li>
 </ul>

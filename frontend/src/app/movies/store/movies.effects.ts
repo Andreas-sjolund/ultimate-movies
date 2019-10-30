@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 
 import * as fromApp from '../../store/app.reducer';
@@ -10,12 +10,22 @@ import { Movie } from '../movie.model';
 
 @Injectable()
 export class MoviesEffects {
+  
   @Effect()
   fetchMovies = this.actions$.pipe(
     ofType(MoviesActions.FETCH_MOVIES),
     switchMap(() => {
+      const httpOptions = {
+        headers: new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin':'*'
+        })
+      };
+
       return this.http.get<Movie[]>(
-        '' // path to Johans epic API
+        'http://localhost:4200/api/movies',
+        httpOptions
       );
     }),
     map(movies => {

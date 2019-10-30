@@ -3,7 +3,7 @@ package daos
 import (
 	"log"
 
-	"github.com/trochimov/ultimate-movies/backend/cmd/models"
+	"../models"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

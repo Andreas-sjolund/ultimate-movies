@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/trochimov/ultimate-movies/backend/cmd/apis"
-	. "github.com/trochimov/ultimate-movies/backend/cmd/daos"
-	. "github.com/trochimov/ultimate-movies/backend/config"
+	"./cmd/apis"
+	. "./cmd/daos"
+	. "./config"
 )
 
 var config = Config{}
@@ -24,11 +24,11 @@ func init() {
 // Define HTTP request routes
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/movies", apis.GetAllMovies).Methods("GET")
-	r.HandleFunc("/movies", apis.CreateMovie).Methods("POST")
-	r.HandleFunc("/movies", apis.DeleteMovie).Methods("DELETE")
-	r.HandleFunc("/movies", apis.UpdateMovie).Methods("PUT")
-	r.HandleFunc("/movies/{id}", apis.GetMovieByID).Methods("GET")
+	r.HandleFunc("/api/movies", apis.GetAllMovies).Methods("GET")
+	r.HandleFunc("/api/movies", apis.CreateMovie).Methods("POST")
+	r.HandleFunc("/api/movies", apis.DeleteMovie).Methods("DELETE")
+	r.HandleFunc("/api/movies", apis.UpdateMovie).Methods("PUT")
+	r.HandleFunc("/api/movies/{id}", apis.GetMovieByID).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
 		log.Fatal(err)
 	}
