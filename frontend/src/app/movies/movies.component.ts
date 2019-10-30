@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from './movie.model';
-
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+import * as MoviesActions from './store/movies.actions';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movies',
@@ -9,18 +13,20 @@ import { Movie } from './movie.model';
 })
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
-
-  constructor() { }
+  subscription: Subscription;
+  constructor(
+    public store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit() {
-    const newMovie = new Movie(
-      'Terminator 2: Judgment Day',
-      'James Cameron',
-      'Action',
-      'https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg'
-    );
-    this.movies.push(newMovie);
-    console.log(this.movies);
+    this.subscription = this.store
+      .select('movies')
+      .pipe(map(moviesState => moviesState.movies))
+      .subscribe(movies => {
+        this.movies = movies;
+      });
+
+    this.store.dispatch(new MoviesActions.FetchMovies());
   }
 
 }

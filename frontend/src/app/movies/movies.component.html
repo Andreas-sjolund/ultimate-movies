@@ -1,8 +1,21 @@
-<ul *ngFor="let movie of movies; let i = index">
-    <li>
-        <p>Name: {{ movie.title }}</p>
-        <p>Director: {{ movie.director }}</p>
-        <p>Genre: {{ movie.genre }}</p>
-        <img [src]="movie.imgUrl" />
+<ul class="list-group" *ngFor="let movie of movies; let i = index">
+    <li class="list-group-item d-flex mb-3">
+        <div class="col-9">
+            <div class="row">
+                <label class="col-2 font-weight-bold">Name: </label>
+                <p class="col-10">{{ movie.title }}</p>
+            </div>
+            <div class="row">
+                <label class="col-2 font-weight-bold">Director: </label>
+                <p class="col-10">{{ movie.director }}</p>
+            </div>
+            <div class="row">
+                <label class="col-2 font-weight-bold">Genre: </label>
+                <p class="col-10">{{ movie.genre }}</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <img [src]="movie.imgUrl" />
+        </div>
     </li>
 </ul>
