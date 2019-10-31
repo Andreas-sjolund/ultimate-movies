@@ -19,7 +19,7 @@ export class FetchMovies implements Action {
   readonly type = FETCH_MOVIES;
 }
 
-export class AddMovies implements Action {
+export class AddMovie implements Action {
   readonly type = ADD_MOVIE;
 
   constructor(public payload: Movie) {}
@@ -39,13 +39,13 @@ export class UpdateMovie implements Action {
 export class DeleteMovie implements Action {
   readonly type = DELETE_MOVIE;
 
-  constructor(public payload: number) {}
+  constructor(public payload: {index: number, movieId: string}) {}
 }
 
 export type MoviesActions =
   | SetMovies
   | FetchMovies
-  | AddMovies
+  | AddMovie
   | StartEditMovie
   | UpdateMovie
   | DeleteMovie;

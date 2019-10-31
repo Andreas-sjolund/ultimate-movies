@@ -23,16 +23,35 @@ export class MoviesEffects {
     })
   );
 
-  @Effect()
+  @Effect({dispatch: false})
   deleteMovie = this.actions$.pipe(
     ofType(MoviesActions.DELETE_MOVIE),
-    switchMap(() => {
+    withLatestFrom(this.store.select('movies')),
+    switchMap(([actionData, moviesState]) => {
+      const movieId = actionData.payload.movieId;
       return this.http.delete(
-        '' // Set this to Johan's delete path
-        // 'http://loclahost:4200/api/movies'
-      )
+        `http://localhost:4200/api/movies/${movieId}`
+      );
     })
-  )
+  );
+
+  @Effect({dispatch: false})
+  addMovie = this.actions$.pipe(
+    ofType(MoviesActions.ADD_MOVIE),
+    withLatestFrom(this.store.select('movies')),
+    switchMap(([actionData, moviesState]) => {
+      return this.http.post(
+        'http://localhost:4200/api/movies',
+        {
+          title: actionData.payload.title,
+          director: actionData.payload.director,
+          genre: actionData.payload.genre,
+          image_url: actionData.payload.image_url,
+          description: actionData.payload.description
+        }
+      );
+    })
+  );
 
   constructor(
     private actions$: Actions,

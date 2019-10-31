@@ -1,0 +1,70 @@
+<div class="mb-5 list-group-item">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-3 form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            name="title"
+            ngModel
+            required
+          >
+        </div>
+        <div class="col-sm-3 form-group">
+          <label for="director">Director</label>
+          <input
+            type="text"
+            id="director"
+            class="form-control"
+            name="director"
+            ngModel
+            required
+          >
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="genre">Genre</label>
+          <input
+            type="text"
+            id="genre"
+            class="form-control"
+            name="genre"
+            ngModel
+            required
+          >
+        </div>
+        <div class="col-sm-4 form-group">
+          <label for="image_url">Image url</label>
+          <input
+            type="text"
+            id="image_url"
+            class="form-control"
+            name="image_url"
+            ngModel
+            required
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            class="form-control"
+            name="description"
+            ngModel
+            required
+          >
+        </div>
+      </div>
+      <button
+        class="btn btn-success mr-3"
+        type="submit"
+        [disabled]="!f.valid">Add</button>
+      <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+    </form>
+  </div>
+</div>

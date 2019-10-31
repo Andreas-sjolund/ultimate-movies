@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +17,7 @@ import { StartPageComponent } from './start-page/start-page.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { MoviesEffects } from './movies/store/movies.effects';
 import * as fromApp from './store/app.reducer';
+import { MovieFormComponent } from './movies/movie-form/movie-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: StartPageComponent},
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     MoviesComponent,
     StartPageComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MovieFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ const appRoutes: Routes = [
     EffectsModule.forRoot([MoviesEffects]),
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

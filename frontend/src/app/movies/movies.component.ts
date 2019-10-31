@@ -36,8 +36,8 @@ export class MoviesComponent implements OnInit {
     this.router.navigate([`/movies/${this.movies[index].id}`]);
   }
 
-  onDeleteMovie(index: number) {
-    this.store.dispatch(new MoviesActions.DeleteMovie(index));
+  onDeleteMovie(index: number, movieId: string) {
+    this.store.dispatch(new MoviesActions.DeleteMovie({index, movieId}));
   }
 
 }

@@ -57,7 +57,7 @@ export function moviesReducer(
       return {
         ...state,
         movies: state.movies.filter((movie, index) => {
-          return index !== action.payload;
+          return index !== action.payload.index;
         })
       };
     default:
