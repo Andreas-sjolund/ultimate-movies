@@ -2,12 +2,11 @@ package apis
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
 	"../daos"
 	"../models"
+	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -52,16 +51,10 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 
 // DeleteMovie DELETE an existing movie from DB
 func DeleteMovie(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-	var movie models.Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
-		fmt.Println(err)
-		return
-	}
-	if err := dao.Delete(movie); err != nil {
-		respondWithError(w, http.StatusInternalServerError, err.Error())
-		fmt.Println(err)
+	params := mux.Vars(r)
+	err := dao.Delete(params["id"])
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid Movie ID")
 		return
 	}
 	respondWithJSON(w, http.StatusOK, map[string]string{"result": "success"})
