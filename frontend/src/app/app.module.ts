@@ -7,6 +7,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,6 +20,7 @@ import * as fromApp from './store/app.reducer';
 const appRoutes: Routes = [
   { path: '', component: StartPageComponent},
   { path: 'movies', component: MoviesComponent},
+  { path: 'movies/:id', component: MovieDetailsComponent},
   { path: '**', component: StartPageComponent}
 ];
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     EffectsModule.forRoot([MoviesEffects]),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

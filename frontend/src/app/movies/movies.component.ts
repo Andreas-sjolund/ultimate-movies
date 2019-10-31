@@ -5,6 +5,7 @@ import * as fromApp from '../store/app.reducer';
 import * as MoviesActions from './store/movies.actions';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -15,7 +16,8 @@ export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
   subscription: Subscription;
   constructor(
-    public store: Store<fromApp.AppState>
+    public store: Store<fromApp.AppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,15 @@ export class MoviesComponent implements OnInit {
       });
 
     this.store.dispatch(new MoviesActions.FetchMovies());
+  }
+
+  onEditMovie(index: number) {
+    this.store.dispatch(new MoviesActions.StartEditMovie(index));
+    this.router.navigate([`/movies/${this.movies[index].id}`]);
+  }
+
+  onDeleteMovie(index: number) {
+    this.store.dispatch(new MoviesActions.DeleteMovie(index));
   }
 
 }

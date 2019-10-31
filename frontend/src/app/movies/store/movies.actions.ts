@@ -5,6 +5,7 @@ import { Movie } from '../movie.model';
 export const FETCH_MOVIES = '[Movies] Fetch Movies';
 export const SET_MOVIES = '[Movies] Set Movies';
 export const ADD_MOVIE = '[Movie] Add Movie';
+export const START_EDIT_MOVIE = '[Movie] Start Edit Movie';
 export const UPDATE_MOVIE = '[Movie] Update Movie';
 export const DELETE_MOVIE = '[Movie] Delete Movie';
 
@@ -24,13 +25,18 @@ export class AddMovies implements Action {
   constructor(public payload: Movie) {}
 }
 
-export class UpdateMovies implements Action {
+export class StartEditMovie implements Action {
+  readonly type = START_EDIT_MOVIE;
+
+  constructor(public payload: number) {}
+}
+export class UpdateMovie implements Action {
   readonly type = UPDATE_MOVIE;
 
-  constructor(public payload: {index: number, newMovies: Movie}) {}
+  constructor(public payload: {index: number, newMovie: Movie}) {}
 }
 
-export class DeleteMovies implements Action {
+export class DeleteMovie implements Action {
   readonly type = DELETE_MOVIE;
 
   constructor(public payload: number) {}
@@ -40,5 +46,6 @@ export type MoviesActions =
   | SetMovies
   | FetchMovies
   | AddMovies
-  | UpdateMovies
-  | DeleteMovies;
+  | StartEditMovie
+  | UpdateMovie
+  | DeleteMovie;

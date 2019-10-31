@@ -10,28 +10,29 @@ import { Movie } from '../movie.model';
 
 @Injectable()
 export class MoviesEffects {
-  
   @Effect()
   fetchMovies = this.actions$.pipe(
     ofType(MoviesActions.FETCH_MOVIES),
     switchMap(() => {
-      const httpOptions = {
-        headers: new HttpHeaders({ 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin':'*'
-        })
-      };
-
       return this.http.get<Movie[]>(
-        'http://localhost:4200/api/movies',
-        httpOptions
+        'http://localhost:4200/api/movies'
       );
     }),
     map(movies => {
       return new MoviesActions.SetMovies(movies);
     })
   );
+
+  @Effect()
+  deleteMovie = this.actions$.pipe(
+    ofType(MoviesActions.DELETE_MOVIE),
+    switchMap(() => {
+      return this.http.delete(
+        '' // Set this to Johan's delete path
+        // 'http://loclahost:4200/api/movies'
+      )
+    })
+  )
 
   constructor(
     private actions$: Actions,
