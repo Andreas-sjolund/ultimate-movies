@@ -60,9 +60,15 @@ func (m *MovieDAO) Insert(movie models.Movie) error {
 	return err
 }
 
-// Delete an exsisting movie
-func (m *MovieDAO) Delete(movie models.Movie) error {
-	err := db.C(COLLECTION).Remove(&movie)
+// Delete an exsisting movie by ID
+func (m *MovieDAO) Delete(id string) error {
+	var movie models.Movie
+	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&movie)
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.C(COLLECTION).Remove(movie)
 	if err != nil {
 		panic(err)
 	}
